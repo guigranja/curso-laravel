@@ -9,6 +9,9 @@
 
     <!--    BootStrap 4-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+{{--    Font Awsome--}}
+    <script src="https://kit.fontawesome.com/3e4ce87fa3.js" crossorigin="anonymous"></script>
 </head>
 <body>
 

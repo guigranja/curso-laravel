@@ -11,7 +11,12 @@
 |
 */
 
-Route::get('/series', 'SeriesController@index');
+Route::get('/series', 'SeriesController@index')
+    ->name('listar_series');
+Route::get('/series/adicionar', 'SeriesController@create')
+    ->name('form_add_serie'); // Dando o nome para a rota
 
-Route::get('/series/adicionar', 'SeriesController@create');
 Route::post('/series/adicionar', 'SeriesController@store');
+
+// Rota para remover. Usamos post para que nenhum robo delete
+Route::delete('/series/{id}', 'SeriesController@destroy');
