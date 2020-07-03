@@ -31,12 +31,21 @@ class SeriesController extends Controller
 //    SeriesFormRequest -> Validações que criamos
     public function store(SeriesFormRequest $request)
     {
-        $serie = Serie::create($request->all());
+        $serie = Serie::create(['nome' => $request->nome]);
+
+        $qtdTemporadas = $request->qtd_temporadas;
+        for ($i = 1; $i <= $qtdTemporadas; $i++) {
+            $temporada = $serie->temporadas()->create(['numero' => $i]);
+
+            for ($j = 1; $j <= $request->ep_por_temporada; $j) {
+                $temporada->episodios()->create(['numero' => $j]);
+            }
+        }
 
 //        Salvando na sessão alguma informação.
         $request->session()->flash(
             'mensagem',
-            "Série {$serie->id} criada com sucesso: {$serie->nome}"
+            "Série {$serie->id} e suas temporadas e episodios criados com sucesso: {$serie->nome}"
         );
 
 //        Redirecionando
