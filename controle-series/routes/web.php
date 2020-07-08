@@ -11,6 +11,12 @@
 |
 */
 
+/*
+ * Passa qual ação sera tomada (get, post, delete ...)
+ * Passa a controller que será chamada
+ * depois do @ passa qual metodo será chamado para aquela rota
+ * */
+
 Route::get('/series', 'SeriesController@index')
     ->name('listar_series');
 Route::get('/series/adicionar', 'SeriesController@create')
@@ -20,3 +26,12 @@ Route::post('/series/adicionar', 'SeriesController@store');
 
 // Rota para remover. Usamos post para que nenhum robo delete
 Route::delete('/series/{id}', 'SeriesController@destroy');
+
+Route::post('/series/{id}/editaNomeSerie', 'SeriesController@editaNomeSerie');
+
+// Rota para as temporadas de uma serie
+Route::get('/series/{serieID}/temporadas', 'TemporadasController@index');
+
+Route::get('/temporadas/{temporada}/episodios', 'EpisodiosController@index');
+
+Route::post('/temporadas/{temporada}/episodios/assistir', 'EpisodiosController@assistir');

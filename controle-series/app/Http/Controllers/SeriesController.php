@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SeriesFormRequest;
 use App\Serie;
+use App\Services\AdicionarSeries;
+use App\Services\RemoverSerie;
 use Illuminate\Http\Request;
 
 class SeriesController extends Controller
@@ -29,38 +31,40 @@ class SeriesController extends Controller
 
 //    Faz o processo de inserir no banco a resposta do formulario
 //    SeriesFormRequest -> Validações que criamos
-    public function store(SeriesFormRequest $request)
+    public function store(SeriesFormRequest $request, AdicionarSeries $adicionarSeries)
     {
-        $serie = Serie::create(['nome' => $request->nome]);
-
-        $qtdTemporadas = $request->qtd_temporadas;
-        for ($i = 1; $i <= $qtdTemporadas; $i++) {
-            $temporada = $serie->temporadas()->create(['numero' => $i]);
-
-            for ($j = 1; $j <= $request->ep_por_temporada; $j) {
-                $temporada->episodios()->create(['numero' => $j]);
-            }
-        }
+        // Adicionando uma Serie. Usando Services
+        $serie = $adicionarSeries->criarSerie(
+            $request->nome,
+            $request->qtd_temporadas,
+            $request->ep_por_temporada
+        );
 
 //        Salvando na sessão alguma informação.
         $request->session()->flash(
             'mensagem',
-            "Série {$serie->id} e suas temporadas e episodios criados com sucesso: {$serie->nome}"
+            "Série {$serie->nome} e suas temporadas e episodios criados com sucesso: {$serie->nome}"
         );
 
 //        Redirecionando
         return redirect()->route('listar_series');
     }
 
-    public function destroy(Request $request)
+    public function destroy(Request $request, RemoverSerie $removerSerie)
     {
-        Serie::destroy($request->id);
-
+        $nomeSerie = $removerSerie->removerSerie($request->id);
         $request->session()->flash(
             'mensagem',
-            "Série foi removida com sucesso !"
+            "Série $nomeSerie foi removida com sucesso !"
         );
-
         return redirect()->route('listar_series');
+    }
+
+    public function editaNomeSerie(int $id, Request $request)
+    {
+        $novoNomeSerie = $request->nome;
+        $serie = Serie::find($id);
+        $serie->nome = $novoNomeSerie;
+        $serie->save();
     }
 }

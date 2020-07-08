@@ -12,6 +12,9 @@
 
 {{--    Font Awsome--}}
     <script src="https://kit.fontawesome.com/3e4ce87fa3.js" crossorigin="anonymous"></script>
+
+{{--    SweetAlert 2 --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 <body>
 

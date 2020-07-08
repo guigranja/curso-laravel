@@ -21,8 +21,7 @@ class CreatTemporadasTable extends Migration
 
             $table->foreign('serie_id')
                 ->references('id')
-                ->on('series')
-                ->onDelete('cascade');
+                ->on('series');
         });
     }
 

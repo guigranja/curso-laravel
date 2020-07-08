@@ -20,9 +20,7 @@ class CreatEpisodiosTable extends Migration
 
             $table->foreign('temporada_id')
                 ->references('id')
-                ->on('temporadas')
-//                Usar onDelete para deletar chaves estrangeiras no MySQL
-                ->onDelete('cascade');
+                ->on('temporadas');
         });
     }
 
