@@ -16,9 +16,6 @@ class EpisodiosController extends Controller
         $mensagem = $request->session()->get('mensagem');
         $serieId = $temporada->serie();
 
-        var_dump($serieId);
-        die();
-
         return view('episodios.index', compact(
             'episodios',
             'temporadaId',
@@ -30,6 +27,8 @@ class EpisodiosController extends Controller
     public function assistir(Temporada $temporada, Request $request)
     {
         $episodiosAssistidos = $request->episodios;
+
+//        Marcando como assistido
         $temporada->episodios->each(function (Episodio $episodio) use ($episodiosAssistidos) {
             $episodio->assistido = in_array(
                 $episodio->id,

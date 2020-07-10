@@ -19,6 +19,7 @@
 
 Route::get('/series', 'SeriesController@index')
     ->name('listar_series');
+
 Route::get('/series/adicionar', 'SeriesController@create')
     ->name('form_add_serie'); // Dando o nome para a rota
 
@@ -35,3 +36,12 @@ Route::get('/series/{serieID}/temporadas', 'TemporadasController@index');
 Route::get('/temporadas/{temporada}/episodios', 'EpisodiosController@index');
 
 Route::post('/temporadas/{temporada}/episodios/assistir', 'EpisodiosController@assistir');
+
+// Autenticação padrão do Laravel
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+// Criando nossa propria rota de login (entrar)
+Route::get('/entrar', 'EntrarController@index');
+Route::post('/entrar', 'EntrarController@entrar');

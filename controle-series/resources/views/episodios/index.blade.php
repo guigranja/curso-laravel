@@ -6,7 +6,7 @@
 
 @section('conteudo')
 
-    @include('mensagem', ['mensagem' => $mensagem])
+{{--    @include('mensagem', ['mensagem' => $mensagem])--}}
 
     <form action="/temporadas/{{ $temporadaId }}/episodios/assistir" method="post">
         @csrf
@@ -20,10 +20,17 @@
             @endforeach
         </ul>
 
-        <span>{{ $serieId }} |</span>
-
-        <button class="btn btn-outline-success mt-2">Salvar</button>
-
-        <a href="/series/{{ $serieId }}/temporadas" class="btn btn-outline-secondary mt-2">Voltar</a>
+        <button class="btn btn-outline-success mt-2" id="save" onclick="avisoMarcarEpisodioAssistido()">Salvar</button>
     </form>
 @endsection
+
+<script>
+    function avisoMarcarEpisodioAssistido() {
+        Swal.fire({
+            icon: 'success',
+            title: 'Episodio salvo como assistido !',
+            showConfirmButton: false,
+            timer: 7000
+        })
+    }
+</script>

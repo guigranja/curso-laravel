@@ -12,7 +12,7 @@
 
                 <span class="d-flex align-items-center">
                     <span class="badge badge-secondary mr-3">
-                        {{ $temporada->episodios->count() }}
+                        {{ $temporada->getEpisodiosAssistidos()->count() }} / {{ $temporada->episodios->count() }}
                     </span>
 
                     <a href="/temporadas/{{ $temporada->id }}/episodios" class="btn btn-outline-primary btn-sm mr-2">
