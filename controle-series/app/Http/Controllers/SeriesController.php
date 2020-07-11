@@ -10,12 +10,6 @@ use Illuminate\Http\Request;
 
 class SeriesController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index(Request $request) {
 //      Ordernando pelo nome query->orderBY->get
         $series = Serie::query()
@@ -49,7 +43,7 @@ class SeriesController extends Controller
 //        Salvando na sessão alguma informação.
         $request->session()->flash(
             'mensagem',
-            "Série {$serie->nome} e suas temporadas e episodios criados com sucesso: {$serie->nome}"
+            "Série {$serie->nome} e suas temporadas e episodios criados com sucesso"
         );
 
 //        Redirecionando

@@ -23,7 +23,7 @@
             <i class="fas fa-sign-in-alt"></i> Entrar
         </button>
 
-        <a href="#" class="btn btn-outline-secondary mt-3">
+        <a href="/registrar" class="btn btn-outline-secondary mt-3">
             <i class="fas fa-registered"></i> Registrar-se
         </a>
     </form>

@@ -45,3 +45,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 // Criando nossa propria rota de login (entrar)
 Route::get('/entrar', 'EntrarController@index');
 Route::post('/entrar', 'EntrarController@entrar');
+
+// Rota de Registrar na aplicação
+Route::get('/registrar', 'RegistroController@create');
+Route::post('/registrar', 'RegistroController@store');
+
+// Sair da Aplicação
+Route::get('/sair', function () {
+    \Illuminate\Support\Facades\Auth::logout();
+
+    return redirect('/entrar');
+});
